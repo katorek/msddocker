@@ -23,4 +23,21 @@
 
 FROM maven:3.3-jdk-8-onbuild
 #CMD ["java","-jar","/usr/src/app/target/msd-docker-1.0-SNAPSHOT-jar-with-dependencies.jar"]
-CMD ["java","-jar","/usr/src/app/target/msd-docker-1.0-SNAPSHOT.jar", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap"]
+#CMD ["java","-jar","/usr/src/app/target/msd-docker-1.0-SNAPSHOT.jar", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap"]
+#CMD ["java","-jar","/usr/src/app/target/msd-docker-1.0-SNAPSHOT-jar-with-dependencies.jar", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap"]
+
+
+
+#FROM alpine/git as clone (1)
+#WORKDIR /app
+#RUN git clone https://github.com/spring-projects/spring-petclinic.git
+
+#FROM maven:3.5-jdk-8-alpine as build (2)
+#WORKDIR /app
+#WORKDIR .
+#RUN mvn install
+
+#FROM openjdk:8-jre-alpine
+WORKDIR .
+COPY --from=build /target/msd-docker-1.0-SNAPSHOT-jar-with-dependencies.jar .
+CMD ["java -jar spring-petclinic-1.5.1.jar"]

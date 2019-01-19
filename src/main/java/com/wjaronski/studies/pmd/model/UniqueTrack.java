@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -16,15 +19,25 @@ import java.util.concurrent.atomic.AtomicLong;
 @Data
 @Builder
 @AllArgsConstructor
+@Entity
 public class UniqueTrack {
+    @Id
     private String songId;
+    @Column(length = 100)
     private String execId;
+    @Column(length = 500)
     private String artist;
+    @Column(length = 500)
     private String songName;
+    @Column
     private AtomicLong listenCounter;
 
     public UniqueTrack(){
         listenCounter = new AtomicLong(0L);
+    }
+
+    public UniqueTrack(String songId) {
+        this.songId = songId;
     }
 
     public void incrementCounter() {

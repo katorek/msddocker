@@ -1,0 +1,31 @@
+debug.info: false
+stats.generate: true
+
+#Disable spring logging
+logging.pattern.console:
+spring:
+#  profiles: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+# H2
+  h2:
+    console:
+      enabled: true
+      path: /h22
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+#  main:
+#    banner-mode: off
+
+
+#
+#spring:
+#profiles: prod
+#jpa:
+#hibernate:
+#ddl-auto: create-drop
